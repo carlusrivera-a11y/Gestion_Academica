@@ -1,63 +1,31 @@
+# Imagen base oficial de PHP con extensiones necesarias
 FROM php:8.2-fpm
 
-# ----------------------------
 # Instalar dependencias del sistema
-# ----------------------------
 RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    git \
-    curl \
-    libzip-dev \
-    libcurl4-openssl-dev \
-    npm \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    git curl zip unzip libpq-dev libpng-dev libjpeg-dev libfreetype6-dev \
+    && docker-php-ext-install pdo pdo_pgsql gd
 
-# ----------------------------
-# Habilitar extensiones PHP necesarias
-# ----------------------------
-RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip curl
-
-# ----------------------------
 # Instalar Composer
-# ----------------------------
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# ----------------------------
-# Directorio de trabajo
-# ----------------------------
-WORKDIR /var/www
+# Establecer directorio de trabajo
+WORKDIR /var/www/html
 
-# ----------------------------
-# Copiar archivos de proyecto
-# ----------------------------
-COPY composer.json composer.lock ./
-COPY package.json package-lock.json* ./
+# Copiar archivos del proyecto
 COPY . .
 
-# ----------------------------
-# Instalar dependencias PHP y Node
-# ----------------------------
-RUN composer install --no-interaction --optimize-autoloader
-RUN npm install
-RUN npm run build
+# Instalar dependencias de Laravel
+RUN composer install --optimize-autoloader --no-dev
 
-# ----------------------------
-# Cache Laravel
-# ----------------------------
-RUN php artisan config:cache
-RUN php artisan route:cache
-RUN php artisan view:cache
+# Generar la clave de la aplicación (Render no tiene php artisan key:generate automático)
+RUN php artisan key:generate || true
 
-# ----------------------------
-# Exponer puerto
-# ----------------------------
-EXPOSE 8000
+# Establecer permisos de storage y cache
+RUN chmod -R 775 storage bootstrap/cache
 
-# ----------------------------
-# Comando por defecto
-# ----------------------------
-CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
+# Exponer el puerto que Render usará
+EXPOSE 10000
+
+# Comando de inicio
+CMD php artisan serve --host=0.0.0.0 --port=10000
