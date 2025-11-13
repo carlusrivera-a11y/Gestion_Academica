@@ -13,7 +13,7 @@ Route::get('/asistencia/mis-clases', [AsistenciaController::class, 'misClases'])
 Route::post('/asistencia', [AsistenciaController::class, 'registrar'])
     ->middleware(['verificarToken', 'verificarPermiso:REGISTRAR_ASISTENCIA']);
 
-// Obtener asistencias del docente autenticado
+// Obtener asistencia del docente autenticado
 Route::get('/asistencias/mias', [AsistenciaController::class, 'misAsistencias'])
     ->middleware(['verificarToken', 'verificarPermiso:VER_ASISTENCIA']);
 
