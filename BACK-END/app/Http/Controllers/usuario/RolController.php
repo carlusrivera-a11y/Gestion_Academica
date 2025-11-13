@@ -135,8 +135,11 @@ class RolController extends Controller
         try {
             $data = DB::select("SELECT id, nombre FROM rol ORDER BY id ASC");
 
-            $bitacoraId = $request->user['bitacoraId'];
-            BitacoraService::logEvent($bitacoraId, 'GET', '/rol', 'Se consultaron todos los roles');
+            $bitacoraId = $request->user['bitacoraId'] ?? null;
+
+            if ($bitacoraId) {
+                BitacoraService::logEvent($bitacoraId, 'GET', '/rol', 'Se consultaron todos los roles');
+            }
 
             return response()->json($data);
         } catch (\Exception $e) {
