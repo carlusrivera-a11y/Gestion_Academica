@@ -1,0 +1,27 @@
+:root {
+  /* Colores institucionales FICCT */
+  --color-primary: #0051a2;
+  --color-primary-light: #0077ff;
+  --color-primary-dark: #003d7a;
+
+  /* Tipografía */
+  --font-family-main: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Fondo general */
+  --background-light: #f2f5fa;
+  --background-gradient: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+
+  /* Bordes y sombras */
+  --border-radius: 10px;
+  --shadow-main: 0 10px 40px rgba(0, 0, 0, 0.25);
+  --shadow-focus: 0 0 0 3px rgba(0, 119, 255, 0.2);
+
+  /* Colores de estado */
+  --color-error: #d62828;
+  --color-error-bg: #ffe8e8;
+  --color-error-border: #f5c2c2;
+
+  /* Tipografía adicional */
+  --text-color: #333;
+  --text-light: #555;
+}

@@ -1,0 +1,164 @@
+@import url('./variables.css');
+
+/* Fondo general */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--background-gradient);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+
+/* Tarjeta del login */
+.login-card {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: var(--shadow-main);
+  width: 380px;
+  padding: 40px 35px;
+  text-align: center;
+  animation: fadeInUp 0.6s ease-in-out;
+}
+
+/* Cabecera institucional */
+.login-header h1 {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.login-header p {
+  color: var(--text-light);
+  margin-bottom: 25px;
+  font-size: 13px;
+}
+
+/* Título principal */
+h2 {
+  margin-bottom: 20px;
+  color: var(--color-primary-dark);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* Formulario */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.form-group {
+  text-align: left;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-color);
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d4d4d4;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  border-color: var(--color-primary-light);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Campo de contraseña */
+.password-input {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-visibility {
+  background: none;
+  border: none;
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.toggle-visibility:hover {
+  transform: scale(1.1);
+}
+
+/* Error */
+.error-box {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  border: 1px solid var(--color-error-border);
+  border-radius: var(--border-radius);
+  padding: 10px;
+  font-size: 13px;
+  animation: shake 0.3s ease;
+}
+
+/* Botón principal */
+button[type="submit"] {
+  margin-top: 10px;
+  width: 100%;
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  transform: translateY(-2px);
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Footer */
+.login-footer {
+  margin-top: 25px;
+  font-size: 11px;
+  color: #777;
+}
+
+/* Responsividad */
+@media (max-width: 450px) {
+  .login-card {
+    width: 90%;
+    padding: 30px 20px;
+  }
+}
+
+/* Animaciones */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}

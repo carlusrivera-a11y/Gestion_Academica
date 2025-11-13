@@ -1,0 +1,57 @@
+@import url('./variables.css');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: var(--font-family-main);
+  background-color: var(--background-light);
+  color: var(--text-color);
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+/* Scrollbar personalizado (opcional) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary-light);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary);
+}
+
+/* Animaciones reutilizables */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
