@@ -3,8 +3,16 @@ FROM php:8.2-fpm
 
 # Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
-    git curl zip unzip libpq-dev libpng-dev libjpeg-dev libfreetype6-dev \
-    && docker-php-ext-install pdo pdo_pgsql gd
+    git \
+    curl \
+    zip \
+    unzip \
+    libpq-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_pgsql gd zip  # 🟢 Aquí agregamos zip
 
 # Instalar Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -18,10 +26,10 @@ COPY . .
 # Instalar dependencias de Laravel
 RUN composer install --optimize-autoloader --no-dev
 
-# Generar la clave de la aplicación (Render no tiene php artisan key:generate automático)
+# Generar la clave de la aplicación
 RUN php artisan key:generate || true
 
-# Establecer permisos de storage y cache
+# Establecer permisos adecuados
 RUN chmod -R 775 storage bootstrap/cache
 
 # Exponer el puerto que Render usará
